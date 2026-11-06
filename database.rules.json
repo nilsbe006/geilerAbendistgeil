@@ -1,0 +1,24 @@
+{
+  "rules": {
+    ".read": "auth != null && auth.token.email.matches(/^(nils|niklas|guido)@geilerabend\\.app$/)",
+    "settings": {
+      ".write": "auth != null && auth.token.email.matches(/^(nils|niklas|guido)@geilerabend\\.app$/)"
+    },
+    "custom": {
+      ".write": "auth != null && auth.token.email.matches(/^(nils|niklas|guido)@geilerabend\\.app$/)"
+    },
+    "hours": {
+      "$hour": {
+        "$owner": {
+          ".write": "auth != null && auth.token.email == $owner + '@geilerabend.app'",
+          "votes": {
+            "$voter": {
+              ".write": "auth != null && auth.token.email == $voter + '@geilerabend.app' && data.parent().parent().exists()",
+              ".validate": "newData.isBoolean()"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,8 @@
 // Getränkekarte – nur alkoholisch.
 // ml = Glasgröße, abv = effektiver Alkoholgehalt des fertigen Drinks in %.
-// phase = wann der Drink am besten passt: early (Warm-up), mid (Hauptteil), late (Endspurt), any.
+// phase = wann der Drink am besten passt: early (Bier-Start), mid (Wird stärker), late (Vollgas), any.
+// mix = Spirituose, zu der man das Mischgetränk selbst wählt (oder pur als Shot).
+// featured = wird in seiner Phase bevorzugt vorgeschlagen.
 
 const CATEGORIES = [
   { id: "bier", label: "Bier", emoji: "🍺", phase: ["any"] },
@@ -8,11 +10,19 @@ const CATEGORIES = [
   { id: "aperitif", label: "Spritz", emoji: "🍹", phase: ["early"] },
   { id: "longdrink", label: "Longdrinks", emoji: "🥃", phase: ["mid", "late"] },
   { id: "cocktail", label: "Cocktails", emoji: "🍸", phase: ["mid"] },
-  { id: "shot", label: "Shots", emoji: "🔥", phase: ["late"] },
+  { id: "shot", label: "Shots & Klopfer", emoji: "🔥", phase: ["mid", "late"] },
+  { id: "mix", label: "Selbst mischen", emoji: "🧪", phase: ["mid", "late"] },
 ];
+
+// Mischgetränke für Spirituosen mit mix: true. "pur" = 2 cl Shot.
+const MIXERS = ["pur", "Cola", "Energy", "O-Saft", "Sprite", "Mate", "Maracuja", "Bitter Lemon", "Ginger Ale", "Kirschsaft"];
+const MIX_SPIRIT_ML = 40;   // 4 cl Spirituose im Longdrink
+const MIX_TOTAL_ML = 250;
+const SHOT_ML = 20;
 
 const DRINKS = [
   // Bier
+  { id: "ochsenhell", name: "Ulmer Gold Ochsen Hell", emoji: "🐂", cat: "bier", ml: 500, abv: 5.0, phase: ["early"], featured: true },
   { id: "pils", name: "Pils", emoji: "🍺", cat: "bier", ml: 330, abv: 4.9, phase: ["any"] },
   { id: "helles", name: "Helles", emoji: "🍺", cat: "bier", ml: 500, abv: 5.0, phase: ["any"] },
   { id: "weizen", name: "Weizen", emoji: "🍺", cat: "bier", ml: 500, abv: 5.4, phase: ["early", "mid"] },
@@ -37,11 +47,8 @@ const DRINKS = [
 
   // Longdrinks
   { id: "gintonic", name: "Gin Tonic", emoji: "🥃", cat: "longdrink", ml: 250, abv: 6.4, phase: ["mid", "late"] },
-  { id: "cubalibre", name: "Cuba Libre", emoji: "🥤", cat: "longdrink", ml: 250, abv: 6.4, phase: ["mid", "late"] },
-  { id: "vodkamate", name: "Vodka Mate", emoji: "🧉", cat: "longdrink", ml: 330, abv: 4.5, phase: ["mid", "late"] },
   { id: "jackycola", name: "Jacky Cola", emoji: "🥃", cat: "longdrink", ml: 250, abv: 6.4, phase: ["mid", "late"] },
   { id: "moscowmule", name: "Moscow Mule", emoji: "🫚", cat: "longdrink", ml: 250, abv: 6.4, phase: ["mid"] },
-  { id: "vodkae", name: "Vodka-E", emoji: "⚡", cat: "longdrink", ml: 250, abv: 6, phase: ["late"] },
 
   // Cocktails
   { id: "mojito", name: "Mojito", emoji: "🌱", cat: "cocktail", ml: 300, abv: 6.7, phase: ["mid"] },
@@ -61,4 +68,12 @@ const DRINKS = [
   { id: "sambuca", name: "Sambuca", emoji: "🔥", cat: "shot", ml: 20, abv: 38, phase: ["late"] },
   { id: "feigling", name: "Kleiner Feigling", emoji: "🍾", cat: "shot", ml: 20, abv: 20, phase: ["late"] },
   { id: "jaegerbomb", name: "Jägerbomb", emoji: "💣", cat: "shot", ml: 200, abv: 7, phase: ["late"] },
+  { id: "klopfer", name: "Kleiner Klopfer", emoji: "👊", cat: "shot", ml: 20, abv: 16, phase: ["mid", "late"], featured: true },
+  { id: "schuettler", name: "Schüttler", emoji: "🫨", cat: "shot", ml: 20, abv: 16, phase: ["mid", "late"], featured: true },
+  { id: "dosmas", name: "Dos Mas Zimt", emoji: "🍂", cat: "shot", ml: 20, abv: 20, phase: ["late"], featured: true },
+
+  // Selbst mischen – Mischgetränk wird beim Auswählen festgelegt
+  { id: "vodka", name: "Vodka", emoji: "🧊", cat: "mix", abv: 37.5, mix: true, phase: ["mid", "late"], featured: true },
+  { id: "bacardi", name: "Bacardi", emoji: "🦇", cat: "mix", abv: 37.5, mix: true, phase: ["mid", "late"], featured: true },
+  { id: "ficken", name: "Ficken", emoji: "🍑", cat: "mix", abv: 15, mix: true, phase: ["mid", "late"], featured: true },
 ];
