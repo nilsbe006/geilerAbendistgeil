@@ -1,15 +1,14 @@
 // Firebase-Web-Config: Firebase Console → Projekteinstellungen → Deine Apps → Web-App → "Konfiguration".
 // Diese Werte sind laut Firebase öffentlich – geschützt wird über Login + database.rules.json.
-window.FIREBASE_CONFIG = null;
-/* Beispiel:
 window.FIREBASE_CONFIG = {
-  apiKey: "...",
-  authDomain: "dein-projekt.firebaseapp.com",
-  databaseURL: "https://dein-projekt-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "dein-projekt",
-  appId: "...",
+  apiKey: "AIzaSyBvQA_GE01THdn_1bGyQUF28EMNGwHJAJ8",
+  authDomain: "geilerabend-9a805.firebaseapp.com",
+  databaseURL: "https://geilerabend-9a805-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "geilerabend-9a805",
+  storageBucket: "geilerabend-9a805.firebasestorage.app",
+  messagingSenderId: "734502767681",
+  appId: "1:734502767681:web:b8e3e0857a8809dbb54ac0",
 };
-*/
 
 // Accounts: Login-Name → E-Mail <id>@geilerabend.app in Firebase Authentication.
 window.USERS = [
