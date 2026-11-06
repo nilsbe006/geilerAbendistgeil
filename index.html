@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Geiler Abend ist geil 🍻</title>
+  <meta name="description" content="Stündlicher Getränkeplan für einen geilen Abend – jede Stunde mindestens ein Drink.">
+  <meta name="theme-color" content="#14061f">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍻</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">🍻</span>
+      <div>
+        <input id="eventName" class="event-name" maxlength="40" aria-label="Name des Abends">
+        <p class="tagline">Geiler Abend ist geil – jede Stunde mindestens ein Drink.</p>
+      </div>
+    </div>
+    <div class="controls">
+      <label>Start <select id="startHour"></select></label>
+      <label>Ende <select id="endHour"></select></label>
+      <label>Vibe
+        <select id="vibe">
+          <option value="chill">😌 Chillig</option>
+          <option value="party">🎉 Party</option>
+          <option value="vollgas">🚀 Vollgas</option>
+        </select>
+      </label>
+    </div>
+  </header>
+
+  <section class="status">
+    <div class="progress" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+    <p id="progressText" class="progress-text"></p>
+    <div class="actions">
+      <button id="fillBtn" class="btn primary" title="Leere Stunden mit Vorschlägen füllen">✨ Lücken füllen</button>
+      <button id="rerollBtn" class="btn" title="Alle nicht fixierten Drinks neu auswürfeln">🎲 Neu würfeln</button>
+      <button id="shareBtn" class="btn" title="Link zum Plan kopieren">🔗 Teilen</button>
+      <button id="resetBtn" class="btn ghost" title="Alles leeren">🗑️ Leeren</button>
+    </div>
+  </section>
+
+  <div id="selectBanner" class="select-banner" hidden>
+    <span id="selectText"></span>
+    <button id="cancelSelect" class="btn small">Abbrechen</button>
+  </div>
+
+  <main class="layout">
+    <aside class="library" id="library">
+      <h2>Getränkekarte</h2>
+      <input id="search" class="search" type="search" placeholder="Drink suchen…" autocomplete="off">
+      <div id="catFilter" class="cat-filter"></div>
+      <div id="drinkList" class="drink-list"></div>
+
+      <details class="custom">
+        <summary>➕ Eigenen Drink anlegen</summary>
+        <form id="customForm" class="custom-form">
+          <input name="emoji" placeholder="🍸" maxlength="4" class="emoji-input" aria-label="Emoji">
+          <input name="name" placeholder="Name, z.B. Omas Bowle" required maxlength="30" aria-label="Name">
+          <select name="cat" aria-label="Kategorie"></select>
+          <label>ml <input name="ml" type="number" min="10" max="2000" value="250" required></label>
+          <label>% <input name="abv" type="number" min="0.5" max="80" step="0.1" value="6" required></label>
+          <button class="btn primary small" type="submit">Hinzufügen</button>
+        </form>
+      </details>
+
+      <p class="hint">Drink in eine Stunde <b>ziehen</b> – oder antippen und dann die Stunde antippen. 📌 = fester Drink, bleibt beim Würfeln. Drink hierher zurückziehen = löschen.</p>
+    </aside>
+
+    <section class="timeline" id="timeline" aria-label="Stündlicher Zeitplan"></section>
+  </main>
+
+  <footer class="foot">
+    18+ · Kenn dein Limit · 💧 Wasser zwischendurch · 🚕 Danach nicht ans Steuer
+    <br><small>1 Standardglas (SG) ≈ 10 g Alkohol</small>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="drinks.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
