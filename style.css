@@ -337,6 +337,19 @@ body.selecting .hour:hover { border-color: var(--orange); background: rgba(255, 
 .sug::before { content: "+ "; color: var(--pink); font-weight: 700; }
 .shuffle { font-size: 14px; }
 
+.beta {
+  font-size: 12px;
+  vertical-align: middle;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: var(--orange);
+  color: var(--bg);
+  -webkit-text-fill-color: var(--bg);
+  letter-spacing: 0.05em;
+}
+.countdown { grid-column: 1 / -1; margin: 0; font-size: 14px; color: var(--orange); }
+.countdown[hidden] { display: none; }
+
 /* ---------- Avatare, Login, Dialog ---------- */
 
 .avatar {

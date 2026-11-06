@@ -24,7 +24,7 @@
     <form id="loginForm" class="panel">
       <span class="logo big" aria-hidden="true">🍻</span>
       <h1>Geiler Abend ist geil</h1>
-      <p class="muted">Wer bist du?</p>
+      <p class="muted">Kein Bier vor 4 – wer bist du?</p>
       <div id="loginUsers" class="login-users"></div>
       <input id="loginPassword" type="password" placeholder="Passwort" autocomplete="current-password" required>
       <button class="btn primary" type="submit">Einloggen</button>
@@ -37,8 +37,8 @@
       <div class="brand">
         <span class="logo" aria-hidden="true">🍻</span>
         <div>
-          <h1 class="title">Geiler Abend ist geil</h1>
-          <p class="tagline">Jede Stunde mindestens ein Drink – und alle drei müssen zustimmen.</p>
+          <h1 class="title">Geiler Abend ist geil <span class="beta">BETA</span></h1>
+          <p class="tagline">Kein Bier vor 4 🍺 – danach jede Stunde mindestens ein Drink, und alle drei müssen zustimmen.</p>
         </div>
       </div>
       <div class="controls">
@@ -55,6 +55,7 @@
       <div class="progress" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
       <p id="progressText" class="progress-text"></p>
       <p id="todoText" class="todo-text"></p>
+      <p id="countdown" class="countdown" hidden></p>
     </section>
 
     <div id="selectBanner" class="select-banner" hidden>

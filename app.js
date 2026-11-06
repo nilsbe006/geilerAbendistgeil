@@ -2,7 +2,7 @@
 
 const GRAMS_PER_SG = 10; // 1 Standardglas ≈ 10 g reiner Alkohol
 const MAX_HOURS = 12;
-const DEFAULT_SETTINGS = { start: 19, end: 3 };
+const DEFAULT_SETTINGS = { start: 16, end: 3 }; // Kein Bier vor 4!
 const PHASE_LABEL = { early: "🍺 Bier-Start", mid: "📈 Wird stärker", late: "🔥 Vollgas" };
 
 const USERS = window.USERS;
@@ -353,6 +353,21 @@ function renderStatus() {
   if (open) todo.push(`🗳️ Du musst noch über <b>${open}</b> Vorschl${open === 1 ? "ag" : "äge"} abstimmen`);
   if (missingMine) todo.push(`✍️ In <b>${missingMine}</b> Stunde${missingMine === 1 ? "" : "n"} fehlt noch dein Vorschlag`);
   $("#todoText").innerHTML = todo.join(" · ") || "👌 Du bist auf dem neuesten Stand.";
+  renderCountdown();
+}
+
+// Countdown bis zum Start, solange der Abend heute noch nicht begonnen hat
+function renderCountdown() {
+  const now = new Date();
+  const start = new Date(now);
+  start.setHours(settings().start, 0, 0, 0);
+  const mins = Math.ceil((start - now) / 60000);
+  const el = $("#countdown");
+  el.hidden = !(mins > 0 && mins <= 12 * 60);
+  if (!el.hidden) {
+    const h = Math.floor(mins / 60);
+    el.innerHTML = `⏳ Kein Bier vor 4 – noch <b>${h ? h + " h " : ""}${mins % 60} min</b> bis zum ersten ${fmtHour(settings().start)}-Bier 🍺`;
+  }
 }
 
 function renderSelectBanner() {
@@ -475,7 +490,7 @@ function setupApp() {
 
   document.addEventListener("click", onClick);
   setupDragAndDrop();
-  setInterval(() => me && renderTimeline(), 60 * 1000); // "JETZT"-Markierung aktuell halten
+  setInterval(() => { if (me) { renderTimeline(); renderCountdown(); } }, 60 * 1000); // "JETZT"-Markierung aktuell halten
 }
 
 function toggleSelect(id) {
